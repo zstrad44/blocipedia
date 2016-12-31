@@ -15,7 +15,23 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
+ @import "font-awesome";
 
+
+html, body {
+  font-family: 'Lato', sans-serif;
+}
 .navbar {
   background-color: #ddd;
+}
+a.navbar-brand {
+  font-size: 1.5em;
+  padding-left:20px;
+  font-weight: 600;
+  color: #4285F4;
+}
+
+.fa-black-tie {
+  color: #696969;
 }
