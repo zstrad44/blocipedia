@@ -19,14 +19,18 @@
       <div class=" plan_box free_box">
         <h2>Free Plan</h2>
         <h4>Create as many public wiki's as you want!</h4>
+        <%= link_to(new_user_registration_path) do %>
         <button class="btn btn-info btn-block">Free Account</button>
+        <% end %>
       </div>
     </div>
     <div class="col-lg-5 col-md-5 pull-right col-sm-12">
       <div class=" plan_box premium_box">
         <h2>Premium User</h2>
         <h4>Create Private Wiki's</h4>
+        <%= link_to(new_user_registration_path) do %>
         <button class="btn btn-success btn-block">Go Premium</button>
+        <% end %>
       </div>
     </div>
   </div>
