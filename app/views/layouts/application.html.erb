@@ -48,8 +48,10 @@
                   </ul>
                 </li>
               <% else %>
-                <li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link btn btn-success' %></li>
-                <li><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link btn'  %></li>
+                <li>
+                  <%= link_to 'Sign Up'.html_safe, new_user_registration_path, class: "navbar-link btn signUpBtn" %>
+                </li>
+                <li><%= link_to 'Sign In'.html_safe, new_user_session_path, class: "navbar-link btn signInBtn"  %></li>
               <% end %>
             </ul>
         </div>

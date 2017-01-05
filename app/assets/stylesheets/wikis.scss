@@ -1,7 +1,3 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 $screen-lg: 1200px;
 $screen-md: 992px;
 $screen-sm: 768px;
@@ -27,34 +23,3 @@ $warning:         #ffbb33 !default;
 $warning-dark:         #FF8800 !default;
 $danger:          #ff4444 !default;
 $danger-dark:          #CC0000 !default;
-
-
-.jumbotron {
-  background-color: $primary !important;
-  color: #fff !important;
-}
-.jumbotron button {
-  background-color: $gray-lighter;
-  color: $gray-dark;
-
-}
-.plan_box {
-  box-shadow: 0px 0px 25px 0px rgba(89, 89, 89, .4);
-  background-color: #fefefe;
-  padding: 15px 20px;
-  border-radius: 5px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.plan_box h4 {
-  margin-bottom: 15px;
-}
-.plan_box a:hover {
-  text-decoration: none;
-}
-.free_box {
-
-}
-.premium_box {
-
-}

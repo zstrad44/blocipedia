@@ -18,6 +18,31 @@
  @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
  @import "font-awesome";
 
+ $screen-lg: 1200px;
+ $screen-md: 992px;
+ $screen-sm: 768px;
+ $screen-xs: 480px;
+
+ $gray-darkest:      #222 !default;
+ $gray-darker:       #333 !default;
+ $gray-dark:         #555 !default;
+ $gray-base:         #777 !default;
+ $gray:              #ddd !default;
+ $gray-light:        #eee !default;
+ $gray-lighter:      #f1f1f1 !default;
+ $gray-lightest:     #fafafa !default;
+
+ $primary:         #4285F4 !default;
+ $primary-dark:         #0d47a1 !default;
+ $success-light:         #00C851 !default;
+ $success:         #5cb85c !default;
+ $success-dark:         #449d44 !default;
+ $info:            #33b5e5 !default;
+ $info-dark:            #0099CC !default;
+ $warning:         #ffbb33 !default;
+ $warning-dark:         #FF8800 !default;
+ $danger:          #ff4444 !default;
+ $danger-dark:          #CC0000 !default;
 
 html, body {
   font-family: 'Lato', sans-serif;
@@ -32,7 +57,38 @@ a.navbar-brand {
   color: #4285F4;
 }
 
-.fa-black-tie {
+.navbar .signUpBtn {
+  background-color: $success;
+  border-radius: 0px;
+  color: #fff;
+  transition: .25s ease-in;
+  font-size: 1.1em;
+}
+.navbar .signUpBtn:hover {
+  background-color: $success-dark;
+  transition: .25s ease-out;
+
+}
+.navbar .signInBtn {
+  background-color: $gray;
+  border-radius: 0px;
+  color: #fff;
+  font-size: 1.1em;
+  transition: .25s ease-in;
+}
+.navbar .signInBtn:hover {
+  background-color: $gray-light;
+  transition: .25s ease-out;
+
+}
+
+.btn {
+  transition: .25s ease-in;
+}
+.btn:hover {
+  transition: .25s ease-out;
+}
+.navbar .fa-black-tie {
   color: #696969;
 }
 .formBox {
