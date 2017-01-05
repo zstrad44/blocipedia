@@ -81,6 +81,19 @@ a.navbar-brand {
   transition: .25s ease-out;
 
 }
+.navbar-toggle {
+background-color: $gray;
+}
+#myNavbar.navbar-collapse.collapse.in {
+  transition: .2s ease-in;
+}
+#myNavbar.navbar-collapse.collapse {
+  transition: .2s ease-out;
+  border-top: 2px solid $gray; 
+}
+.navbar-toggle .icon-bar {
+  background-color: #fff;
+}
 
 .btn {
   transition: .25s ease-in;

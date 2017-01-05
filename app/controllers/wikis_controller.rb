@@ -12,6 +12,7 @@ class WikisController < ApplicationController
 
   # GET /wikis/1
   def show
+    @wiki = Wiki.find(params[:id])
   end
 
   # GET /wikis/new
@@ -21,24 +22,33 @@ class WikisController < ApplicationController
 
   # GET /wikis/1/edit
   def edit
+    @wiki = Wiki.find(params[:id])
+
   end
 
   # POST /wikis
   def create
     @wiki = Wiki.new(wiki_params)
+    @wiki.user = current_user
+
 
     if @wiki.save
       redirect_to @wiki, notice: 'Wiki was successfully created.'
     else
+      flash[:alert] = "Something is wrong, please try again."
       render :new
     end
   end
 
   # PATCH/PUT /wikis/1
   def update
+    @wiki = Wiki.find(params[:id])
+    @wiki.assign_attributes(wiki_params)
+
     if @wiki.update(wiki_params)
       redirect_to @wiki, notice: 'Wiki was successfully updated.'
     else
+      flash[:alert] = "Something is wrong, please try again."
       render :edit
     end
   end

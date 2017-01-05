@@ -23,3 +23,106 @@ $warning:         #ffbb33 !default;
 $warning-dark:         #FF8800 !default;
 $danger:          #ff4444 !default;
 $danger-dark:          #CC0000 !default;
+
+.gray-text {
+  color:$gray-dark;
+  padding-left:5px; 
+}
+.panel-footer.wiki-footer {
+  background: $gray !important;
+}
+.wiki-footer .dropdown {
+  text-align: right;
+  float: right;
+}
+
+.wikis-index-heading h2 {
+   margin-top: 10px;
+}
+.wiki-heading h3 {
+   margin-top: 10px;
+}
+.wiki-panel-inner-body {
+  box-shadow: 0px 0px 10px rgba(60, 60, 60, .35);
+}
+
+.wiki-footer .btn-view-wiki {
+  text-align: center;
+  width: 200px;
+  font-size: 1.1em;
+}
+.wiki-edit-dropdown .dropdown-menu {
+  background-image: none;
+  padding: 0;
+  text-align: center;
+  width: 20px;
+}
+.wiki-edit-dropdown .dropdown-menu li a.menu-edit-wiki {
+  background: $warning;
+  color: #fff;
+  background-image: none;
+  transition: .25s ease-in;
+}
+.wiki-edit-dropdown .dropdown-menu li a.menu-edit-wiki:hover {
+  background: $warning-dark;
+  color: #fff;
+  background-image: none;
+  transition: .25s ease-out;
+}
+.wiki-edit-dropdown .dropdown-menu li a.menu-destroy-wiki {
+  background: $danger;
+  color: #fff;
+  background-image: none;
+  transition: .25s ease-in;
+}
+.wiki-edit-dropdown .dropdown-menu >li> a.menu-destroy-wiki:hover {
+  background: $danger-dark;
+  color: #fff;
+  background-image: none;
+  transition: .25s ease-out;
+}
+
+.wiki-panel-body {
+  background: $gray-light;
+  padding: 15px;
+}
+.panel-body.wiki-panel-inner-body {
+padding: 25px 20px ;
+color: $gray-base;
+}
+.wiki-panel-inner-body {
+
+h1 {
+  font-size: 2.5em;
+  color: $primary;
+}
+h2 {
+  font-size: 2em;
+  color: $info-dark;
+}
+h3 {
+  font-size: 1.5em;
+  color: $info;
+}
+h4 {
+  font-size: 1em;
+}
+h5 {
+  font-size: .9em;
+}
+h6 {
+  font-size: .8em;
+}
+p {
+  font-size: 1.1em;
+}
+
+}
+@media (max-width: $screen-xs) {
+  .wiki-footer .btn-view-wiki {
+    text-align: center;
+    width: 150px;
+    font-size: 1.1em;
+  }
+
+}

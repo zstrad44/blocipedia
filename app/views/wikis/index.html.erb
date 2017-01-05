@@ -1,51 +1,64 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+<div class="container">
+ <div class="alert alert-info alert-dismissable">
+   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+   <strong id="notice"><%= notice %></strong>
+ </div>
+</div>
+<% end %>
 
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12">
+    <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
       <div class="panel panel-sm panel-primary">
-        <div class="panel-heading"><h2>Wikis</h2></div>
+        <div class="panel-heading wikis-index-heading">
+          <h2>Wikis</h2>
+            <span style="text-align:right; position:inherit; float:right; margin-top:-30px; margin-bottom:10px;"><%= link_to 'New Wiki', new_wiki_path, class: 'btn btn-success btn-sm' %></span>
+        </div>
         <div class="panel-body">
           <div class="panel-group">
             <% @wikis.each do |wiki| %>
               <div class="panel panel-info">
-                <div class="panel-heading"><h3>
-                  <span>Wiki Title: <%= wiki.title %></span>
+                <div class="panel-heading wiki-heading"><h3>
+                  <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= wiki.title %></span>
                 </h3>
                   <% if wiki.private %>
                     <span class="label label-danger"> Private</span>
                   <% else %>
                     <span class="label label-success"> Public</span>
                   <% end %>
+                  <% if wiki.created_at == wiki.updated_at %>
+                  <span class="label label-info">Posted: <span class="gray-text"><%= time_ago_in_words(wiki.created_at) %> ago</span></span>
+                  <% else %>
+                    <span class="label label-info">Posted: <span class="gray-text"><%= time_ago_in_words(wiki.created_at) %> ago</span></span>
+                    <span class="label label-warning">Updated: <span class="gray-text"><%= time_ago_in_words(wiki.updated_at) %> ago</span></span>
+                  <% end %>
                 </div>
-                <div class="panel-body">
-
+                <div class="panel-body wiki-panel-body">
                   <span class="label label-primary"><%= wiki.user %></span>
-                    <div class="panel">
-                      <p><%= wiki.body %></p>
+                    <div class="panel ">
+                      <div class="panel-body wiki-panel-inner-body">
+                        <p><%= wiki.body %></p>
+                      </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                  <p>Posted: Yesterday</p>
-                  <div class="dropdown pull-right">
+                <div class="panel-footer wiki-footer">
+                  <div class="dropdown wiki-edit-dropdown">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                     <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li><%= link_to 'Edit Wiki', edit_wiki_path(wiki), class: "" %></li>
-                      <li><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: "" %></li>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><%= link_to 'Edit Wiki', edit_wiki_path(wiki), class: " menu-edit-wiki" %></li>
+                      <li><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: "menu-destroy-wiki" %></li>
                     </ul>
                   </div>
-
-
-                  <%= link_to '<i class="fa fa-black-tie" aria-hidden="true"></i> View Wiki'.html_safe, wiki, class: "btn btn-primary btn-sm pull-right" %>
+                  <%= link_to '<i class="fa fa-black-tie" aria-hidden="true"></i> View Wiki'.html_safe, wiki, class: "btn btn-primary btn-sm btn-view-wiki" %>
                 </div>
               </div>
             <% end %>
           </div>
-
         </div>
-        <div class="panel-footer" style="text-align:center;">
+        <div class="panel-footer wikis-index-footer" style="text-align:center;">
           <%= link_to 'New Wiki', new_wiki_path, class: 'btn btn-success btn-block' %>
         </div>
       </div>
