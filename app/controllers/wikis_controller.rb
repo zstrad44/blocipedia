@@ -1,8 +1,6 @@
-
-
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  #before_action :authorize_user, except: [:show, :new, :create]
+  # before_action :authorize_user, except: [:show, :new, :create]
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
 
   # GET /wikis
@@ -23,7 +21,7 @@ class WikisController < ApplicationController
   # GET /wikis/1/edit
   def edit
     @wiki = Wiki.find(params[:id])
-
+    authorize @wiki
   end
 
   # POST /wikis
@@ -44,6 +42,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
+    authorize @wiki
 
     if @wiki.update(wiki_params)
       redirect_to @wiki, notice: 'Wiki was successfully updated.'
@@ -56,6 +55,7 @@ class WikisController < ApplicationController
   # DELETE /wikis/1
   def destroy
     @wiki.destroy
+    authorize @wiki
     redirect_to wikis_url, notice: 'Wiki was successfully destroyed.'
   end
 

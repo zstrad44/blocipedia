@@ -10,8 +10,14 @@
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
     <div class="panel panel-info">
       <div class="panel-heading wiki-heading"><h3>
-        <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= @wiki.title %></span>
-      </h3>
+      <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= @wiki.title %></span></h3>
+      <h4 class="gray-text">By: <%= @wiki.user.email.split("@")[0].titleize %>
+      <% if @wiki.user.admin? %>
+        <span class="label label-danger"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</span>
+        <% elsif @wiki.user.premium? %>
+        <span class="label label-warning"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
+      <% end %>
+      </h4>
         <% if @wiki.private %>
           <span class="label label-danger"> Private</span>
         <% else %>
@@ -25,7 +31,6 @@
         <% end %>
       </div>
       <div class="panel-body wiki-panel-body">
-        <span class="label label-primary"><%= @wiki.user %></span>
           <div class="panel ">
             <div class="panel-body wiki-panel-inner-body">
               <p><%= @wiki.body %></p>
