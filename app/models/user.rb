@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase if email.present? }
 
-  validates :password, presence: true, length: {      minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   validates :email,
             presence: true,

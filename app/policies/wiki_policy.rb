@@ -1,4 +1,20 @@
 class WikiPolicy < ApplicationPolicy
+
+  def destroy?
+    # @current_user.admin? || @current_user == @wiki.user
+    record.user == user
+
+  end
+
+  def edit?
+    
+    destroy?
+  end
+
+  def update?
+    destroy?
+  end
+
   class Scope < Scope
     attr_reader :user, :scope
 
@@ -15,9 +31,6 @@ class WikiPolicy < ApplicationPolicy
       end
     end
 
-    def destroy?
-      # @current_user.admin? || @current_user == @wiki.user
-      record.user == user
-    end
+
   end
 end

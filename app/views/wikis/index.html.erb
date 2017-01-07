@@ -1,13 +1,3 @@
-<% if flash[:notice] %>
-<div class="container">
- <div class="alert alert-info alert-dismissable">
-   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-   <strong id="notice"><%= notice %></strong>
- </div>
-</div>
-<% end %>
-
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
@@ -21,8 +11,14 @@
             <% @wikis.each do |wiki| %>
               <div class="panel panel-info">
                 <div class="panel-heading wiki-heading"><h3>
-                  <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= wiki.title %></span>
-                </h3>
+                <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= wiki.title %></span></h3>
+                <h4 class="gray-text">By: <%= wiki.user.email.split("@")[0].titleize %>
+                <% if wiki.user.admin? %>
+                  <span class="label label-admin"><i class="fa fa-power-off" aria-hidden="true"></i> Admin</span>
+                  <% elsif wiki.user.premium? %>
+                  <span class="label label-premium"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
+                <% end %>
+                </h4>
                   <% if wiki.private %>
                     <span class="label label-danger"> Private</span>
                   <% else %>
@@ -36,14 +32,18 @@
                   <% end %>
                 </div>
                 <div class="panel-body wiki-panel-body">
-                  <span class="label label-primary"><%= wiki.user %></span>
                     <div class="panel ">
                       <div class="panel-body wiki-panel-inner-body">
-                        <p><%= wiki.body %></p>
+                        <% if wiki.private? && wiki.user != current_user && !current_user.admin? %>
+                           <h3><span class="label label-danger">This Wiki is set to private..</span></h3>
+                        <% else %>
+                          <p><%= wiki.body %></p>
+                        <% end %>
                       </div>
                     </div>
                 </div>
                 <div class="panel-footer wiki-footer">
+                  <% if wiki.user == current_user || current_user.admin? %>
                   <div class="dropdown wiki-edit-dropdown">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                     <span class="caret"></span></button>
@@ -52,6 +52,7 @@
                       <li><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: "menu-destroy-wiki" %></li>
                     </ul>
                   </div>
+                  <% end %>
                   <%= link_to '<i class="fa fa-black-tie" aria-hidden="true"></i> View Wiki'.html_safe, wiki, class: "btn btn-primary btn-sm btn-view-wiki" %>
                 </div>
               </div>

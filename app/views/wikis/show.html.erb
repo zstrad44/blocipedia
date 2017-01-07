@@ -1,11 +1,4 @@
- <% if flash[:notice] %>
-<div class="container">
-  <div class="alert alert-success alert-dismissable">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong id="notice"><%= notice %></strong>
-  </div>
-</div>
-<% end %>
+
 <div class="container-fluid">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
     <div class="panel panel-info">
@@ -13,9 +6,9 @@
       <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= @wiki.title %></span></h3>
       <h4 class="gray-text">By: <%= @wiki.user.email.split("@")[0].titleize %>
       <% if @wiki.user.admin? %>
-        <span class="label label-danger"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</span>
+        <span class="label label-admin"><i class="fa fa-power-off" aria-hidden="true"></i> Admin</span>
         <% elsif @wiki.user.premium? %>
-        <span class="label label-warning"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
+        <span class="label label-premium"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
       <% end %>
       </h4>
         <% if @wiki.private %>
@@ -33,12 +26,17 @@
       <div class="panel-body wiki-panel-body">
           <div class="panel ">
             <div class="panel-body wiki-panel-inner-body">
-              <p><%= @wiki.body %></p>
+              <% if @wiki.private? && @wiki.user != current_user && !current_user.admin? %>
+                 <h3><span class="label label-danger">This @wiki is set to private..</span></h3>
+              <% else %>
+                <p><%= @wiki.body %></p>
+              <% end %>
             </div>
           </div>
       </div>
       <div class="panel-footer wiki-footer">
-        <div class="dropdown wiki-edit-dropdown">
+        <% if @wiki.user == current_user || current_user.admin? %>
+        <div class="dropdown @wiki-edit-dropdown">
           <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
           <span class="caret"></span></button>
           <ul class="dropdown-menu dropdown-menu-right">
@@ -46,6 +44,7 @@
             <li><%= link_to 'Destroy', @wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: "menu-destroy-wiki" %></li>
           </ul>
         </div>
+        <% end %>
         <%= link_to 'Back', :back, class: "btn btn-warning" %>
         <%= link_to '<i class="fa fa-black-tie" aria-hidden="true"></i> View All Wiki\'s'.html_safe, wikis_path, class: "btn btn-primary btn-sm btn-view-wiki" %>
       </div>
