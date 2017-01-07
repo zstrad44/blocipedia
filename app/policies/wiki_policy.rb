@@ -1,13 +1,12 @@
 class WikiPolicy < ApplicationPolicy
 
   def destroy?
-    # @current_user.admin? || @current_user == @wiki.user
-    record.user == user
+    #@current_user.admin? || @current_user == @wiki.user
+    record.user == user || user.admin?
 
   end
 
   def edit?
-    
     destroy?
   end
 

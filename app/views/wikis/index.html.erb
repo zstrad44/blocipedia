@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="panel-footer wiki-footer">
-                  <% if wiki.user == current_user || current_user.admin? %>
+                  <% if policy(wiki).destroy? %>
                   <div class="dropdown wiki-edit-dropdown">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                     <span class="caret"></span></button>

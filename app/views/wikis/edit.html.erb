@@ -2,13 +2,15 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-sm-12">
       <div class="panel panel-sm panel-primary">
-        <div class="panel-heading"><h1>Editing Wiki </h1></div>
+        <div class="panel-heading"><h1>Editing Wiki </h1>
+            <span style="text-align:right; position:inherit; float:right; margin-top:-65px; margin-bottom:10px;"><%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i> Delete Wiki'.html_safe, @wiki, method: :delete, data: { confirm: 'Are you sure? This action can not be undone.' }, class: "btn btn-danger" %></span>
+        </div>
         <div class="panel-body">
           <%= render 'form' %>
         </div>
         <div class="panel-footer" style="text-align:right;">
           <%= link_to 'View Wiki', @wiki, data: { confirm: 'Are you sure? Any edits you have made will be lost.' }, class: "btn btn-primary" %>
-            <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i> Cancel'.html_safe, wikis_path, data: { confirm: 'Are you sure? Any edits you have made will be lost.' }, class: "btn btn-danger btn-lg" %>
+            <%= link_to 'Cancel'.html_safe, wikis_path, data: { confirm: 'Are you sure? Any edits you have made will be lost.' }, class: "btn btn-danger btn-lg" %>
         </div>
       </div>
     </div>
