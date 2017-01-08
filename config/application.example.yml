@@ -1,0 +1,7 @@
+#Live Keys: production
+STRIPE_SECRET_KEY:
+STRIPE_PUBLISHABLE_KEY:
+
+# Test Keys:  development, staging
+STRIPE_SECRET_KEY_TEST:
+STRIPE_PUBLISHABLE_KEY_TEST: 
