@@ -24,12 +24,16 @@ class User < ActiveRecord::Base
    update_attribute(:role, new_role)
   end
 
-  def downgrade
-   self.change_user_role(0)
+  def cancel_privates
+    @user = self
+    @user.wikis.each { |wiki| wiki.set_as_public }
   end
 
+  def downgrade
+   self.change_user_role(0)
+   self.cancel_privates
+  end
   private
-
   def set_standard_role
     self.role ||= :standard
   end

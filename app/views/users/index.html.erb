@@ -1,11 +1,36 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <%= @users.each do |user| %>
-
-      <p><%= link_to "#{user.email}", user %></p>
-
-      <% end %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2>Blocipedia Users</h2>
+        </div>
+          <div class="panel-body">
+            <div class="panel-group">
+              <% @users.each do |user| %>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-lg-5 col-xs-8">
+                        <h4>
+                          <%= link_to "#{user.email.split('@')[0].titleize}", user, class: "" %>
+                          <% if user.admin? %>
+                            <span class="label label-admin"><i class="fa fa-power-off" aria-hidden="true"></i> Admin</span>
+                          <% elsif user.premium? %>
+                            <span class="label label-premium"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
+                          <% end %>
+                        </h4>
+                      </div>
+                      <div class="col-xs-4 pull-right">
+                        <h4>Total Wikis Posted: <span class="text-primary"><%= user.wikis.count %></span></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>

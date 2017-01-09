@@ -122,3 +122,15 @@ background-color: $gray;
   border-color: #eed3d7;
   color: #b94a48;
 }
+
+// Back to top button styles
+#top-link-block.affix-top {
+    position: absolute; /* allows it to "slide" up into view */
+    bottom: -82px; /* negative of the offset - height of link element */
+    left: 10px; /* padding from the left side of the window */
+}
+#top-link-block.affix {
+    position: fixed; /* keeps it on the bottom once in view */
+    bottom: 18px; /* height of link element */
+    left: 10px; /* padding from the left side of the window */
+}

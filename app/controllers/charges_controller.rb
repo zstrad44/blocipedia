@@ -41,7 +41,7 @@ class ChargesController < ApplicationController
 
   def cancel_subscription
     @user = current_user
-    current_user.downgrade
+    @user.downgrade
     flash[:notice] = "#{current_user.email}, your premium membership has been cancled. All of your private wikis are now public."
     redirect_to user_path(current_user)
   end

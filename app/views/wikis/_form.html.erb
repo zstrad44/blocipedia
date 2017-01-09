@@ -23,10 +23,12 @@
     <%= f.label :body, class: "control-label" %><br>
     <%= f.text_area :body, cols: "30", rows: "10", class: "form-control", placeholder: "Ground Breaking Wiki Content..." %>
   </div>
+  <% if current_user.admin? || current_user.premium? %>
   <div class="field form-group">
     <!-- <%= f.label :private, type: "hidden" %><br> -->
     <span class="label label-warning private-form-label">Make this Wiki private <span class="badge private_badge"><%= f.check_box :private, class: "private_check form-control"%></span></span>
   </div>
+  <% end %>
   <!-- <div class="field form-group">
     <%= f.label :user_id %><br>
     <%= f.text_field :user_id, class: "form-control"  %>

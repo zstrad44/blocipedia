@@ -1,11 +1,13 @@
 class WikisController < ApplicationController
+
   before_action :authenticate_user!, except: [:index, :show]
-  # before_action :authorize_user, except: [:show, :new, :create]
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
+  #before_action :authorize_private_wikis, only: [:new, :edit, :update. :create]
 
   # GET /wikis
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    # @wikis = Wiki.all
   end
 
   # GET /wikis/1
@@ -69,10 +71,12 @@ class WikisController < ApplicationController
       params.require(:wiki).permit(:title, :body, :private, :user_id)
     end
 
-    def authorize_user
-      wiki = Wiki.find(params[:id])
-      unless current_user == wiki.user || current_user.admin?
-        flash[:alert] = "You must be an admin to do that."
+    def authorize_private_wikis
+      @wiki = Wiki.find(params[:id])
+      params.require(:wiki).permit(:private)
+      @user = current_user
+      unless wiki.user.premium? == current_user || current_user.admin?
+        flash[:alert] = "You must be a premium user to do that."
         redirect_to [wiki, wiki]
       end
     end

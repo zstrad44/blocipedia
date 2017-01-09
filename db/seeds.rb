@@ -19,12 +19,12 @@ User.create!(
 end
 users = User.all
 
-60.times do
+10.times do
    Wiki.create!(
      user:   users.sample,
      title:  Faker::Lorem.sentence,
      body:   Faker::Lorem.paragraph(10, true, 8),
-     private: Faker::Boolean.boolean(0.3)
+     private: Faker::Boolean.boolean(0.1)
    )
 
  end

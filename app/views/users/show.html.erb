@@ -4,13 +4,17 @@
       <div class="panel panel-sm panel-primary">
         <div class="panel-heading wikis-index-heading">
           <h2 class="profile-heading">
-              <% if @user.admin? %>
+            <% if @user.premium? %>
               <span class="label label-premium profile-label"><i class="fa fa-trophy" aria-hidden="true"></i></span>
             <% end %>
             <%= @user.email.split("@")[0].titleize %>'s Profile</h2>
+          <span style="text-align:right; position:inherit; float:right; margin-top:-30px; margin-bottom:10px;">
             <% if @user == current_user || current_user.admin? %>
-            <span style="text-align:right; position:inherit; float:right; margin-top:-30px; margin-bottom:10px;"><%= link_to 'Edit Profile', edit_user_registration_path(@user), class: 'btn btn-warning' %></span>
+              <%= link_to 'Edit Profile', edit_user_registration_path(@user), class: 'btn btn-warning' %>
+            <% else %>
+            <%= link_to 'Back', :back, class: "btn btn-warning" %>
             <% end %>
+          </span>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -21,9 +25,9 @@
                 <h4>Membership status:
                   <% if @user.admin? %>
                     <span class="label label-admin"><i class="fa fa-power-off" aria-hidden="true"></i> Admin</span>
-                    <% elsif @user.premium? %>
+                  <% elsif @user.premium? %>
                     <span class="label label-premium"><i class="fa fa-trophy" aria-hidden="true"></i> Premium</span>
-                    <% else %>
+                  <% else %>
                     <%= @user.role %>
                   <% end %>
                 </h4>
@@ -31,11 +35,10 @@
               <% if @user == current_user || current_user.admin? %>
                 <div class="well" style="text-align:center;">
                   <% if @user.standard? %>
-                  <h3 class="text-primary">Want to post private Wikis?</h3>
-                  <br>
-                  <%= link_to 'Upgrade to Premium', new_charge_path, class: "btn btn-success btn-lg" %>
-                  <% elsif @user.premium? || @user.admin?
-                     %>
+                    <h3 class="text-primary">Want to post private Wikis?</h3>
+                    <br>
+                    <%= link_to 'Upgrade to Premium', new_charge_path, class: "btn btn-success btn-lg" %>
+                  <% elsif @user.premium? %>
                        <%= link_to 'Cancel Premium Membership', charge_cancel_subscription_path(@user), class: 'btn btn-default', method: :post, data: {confirm: "Canceling your membership will cause all of your private wikis to become public, are you sure you want to cancel?"}%>
                   <% end %>
                 </div>
@@ -71,7 +74,10 @@
               <div class="panel panel-info">
                 <div class="panel-heading wiki-heading"><h3>
                 <span><i class="fa fa-black-tie" aria-hidden="true"></i> <%= wiki.title %></span></h3>
-                <h4 class="gray-text">By: <%= wiki.user.email.split("@")[0].titleize %>
+                <h4 class="gray-text">By:
+                  <%= link_to(user_path(wiki.user))  do %>
+                    <%= wiki.user.email.split("@")[0].titleize %>
+                  <% end %>
                 <% if wiki.user.admin? %>
                   <span class="label label-admin"><i class="fa fa-power-off" aria-hidden="true"></i> Admin</span>
                   <% elsif wiki.user.premium? %>
@@ -117,7 +123,7 @@
               </div>
             <% end %>
           </div>
-                  </div>
+        </div>
         <div class="panel-footer wikis-index-footer" style="text-align:center;">
           <%= link_to 'New Wiki', new_wiki_path, class: 'btn btn-success btn-block' %>
         </div>
