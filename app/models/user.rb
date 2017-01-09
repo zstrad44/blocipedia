@@ -19,6 +19,15 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :premium, :admin]
 
+
+  def change_user_role(new_role)
+   update_attribute(:role, new_role)
+  end
+
+  def downgrade
+   self.change_user_role(0)
+  end
+
   private
 
   def set_standard_role

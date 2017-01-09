@@ -31,7 +31,7 @@
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li>
-                    <%= link_to edit_user_registration_path, class: "navbar-link" do %>
+                    <%= link_to current_user, class: "navbar-link" do %>
                       <strong><span class="glyphicon glyphicon-user"></span>&nbsp;<%= current_user.email %></strong>
                     <% end %>
 
@@ -57,22 +57,15 @@
         </div>
       </div>
     </nav>
-    <% if flash[:notice] %>
+      <% flash.each do |key, value| %>
      <div class="container">
-       <div class="alert alert-success alert-dismissable">
-         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-         <strong id="notice"><%= notice %></strong>
-       </div>
-     </div>
-     <% end %>
-     <% if flash[:alert] %>
-     <div class="container">
-      <div class="alert alert-danger alert-dismissable">
+      <div class="alert alert-<%= key %> alert-dismissable">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong id="notice"><%= alert %></strong>
+        <strong id="notice"><%= value %></strong>
       </div>
      </div>
-     <% end %>
+    <% end %>
+
     <%= yield %>
 
   </body>

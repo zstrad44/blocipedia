@@ -81,6 +81,9 @@ a.navbar-brand {
   transition: .25s ease-out;
 
 }
+h1,h2,h3,h4,h5 {
+  margin-top: 10px;
+}
 .navbar-toggle {
 background-color: $gray;
 }
@@ -89,7 +92,7 @@ background-color: $gray;
 }
 #myNavbar.navbar-collapse.collapse {
   transition: .2s ease-out;
-  border-top: 2px solid $gray; 
+  border-top: 2px solid $gray;
 }
 .navbar-toggle .icon-bar {
   background-color: #fff;
@@ -106,4 +109,16 @@ background-color: $gray;
 }
 .formBox {
   margin: 10px 0;
+}
+// Custom Flash Alerts
+.alert-notice {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
 }

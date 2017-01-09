@@ -15,7 +15,7 @@ class ChargesController < ApplicationController
   end
 
   def create
-
+    @user = current_user
     customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken]
@@ -27,9 +27,9 @@ class ChargesController < ApplicationController
       description: "Premium Membership - #{current_user.email}",
       currency: 'usd'
     )
-
+    @user.change_user_role(1)
     flash[:notice] = "Thank you for signing up, #{current_user.email}! You are now a premium member."
-    redirect_to wikis_url # or wherever
+    redirect_to user_path(current_user)
 
     # Stripe will send back CardErrors, with friendly messages
     # when something goes wrong.
@@ -38,6 +38,14 @@ class ChargesController < ApplicationController
       flash[:error] = e.message
       redirect_to new_charge_path
   end
+
+  def cancel_subscription
+    @user = current_user
+    current_user.downgrade
+    flash[:notice] = "#{current_user.email}, your premium membership has been cancled. All of your private wikis are now public."
+    redirect_to user_path(current_user)
+  end
+
 
 
 end

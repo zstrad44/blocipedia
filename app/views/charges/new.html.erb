@@ -1,11 +1,39 @@
-
-
-
-
-
-
-
-<%= form_tag charges_path do %>
-   <h4>Click the button!</h4>
-   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
- <% end %>
+ <div class="container">
+   <div class="row">
+     <div class="col-lg-6 col-lg-offset-3 col-md-12 col-sm-12">
+       <div class="panel panel-sm panel-primary">
+         <div class="panel-heading"><h2><i class="fa fa-lock" aria-hidden="true"></i> Secure Payment - Premium Membership</h2></div>
+         <div class="panel-body">
+           <div class="row">
+             <div class="col-xs-12">
+               <h3>Please select your perfered payment method:</h3>
+               <br>
+             </div>
+             <div class="col-lg-12 col-md-12 col-sm-12">
+               <%= form_tag charges_path do %>
+                 <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+               <% end %>
+             </div>
+           </div>
+         </div>
+         <div class="panel-footer" style="text-align:center;">
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-1 col-sm-offset-1"><h3 class="text-primary">
+       <i class="fa fa-cc-visa" aria-hidden="true"></i>
+     </h3></div>
+     <div class="col-sm-1 col-sm-offset-1"><h3 class="text-primary">
+       <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
+     </h3></div>
+     <div class="col-sm-1 col-sm-offset-1"><h3 class="text-primary">
+       <i class="fa fa-cc-discover" aria-hidden="true"></i>
+     </h3></div>
+     <div class="col-sm-1 col-sm-offset-1"><h3 class="text-primary">
+       <i class="fa fa-cc-amex" aria-hidden="true"></i>
+     </h3></div>
+     <div class="col-sm-1 col-sm-offset-1"><h3 class="text-primary">
+       <i class="fa fa-cc-stripe" aria-hidden="true"></i>
+     </h3></div>
+   </div>
+ </div>

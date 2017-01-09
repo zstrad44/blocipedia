@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :users, only: [:index, :show, :edit, :update]
+
   resources :wikis
-  resources :charges, only: [:new, :create]
+  resources :charges, only: [:new, :create] do
+    post '/cancel_subscription' => 'charges#cancel_subscription', as: :cancel_subscription
+  end
 
   authenticated :user do
     root 'wikis#index', as: :authenticated_root
   end
-
 
   root 'welcome#index'
 
