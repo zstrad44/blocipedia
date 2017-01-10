@@ -40,7 +40,7 @@
                         <% if wiki.private? && wiki.user != current_user && !current_user.admin? %>
                            <h3><span class="label label-danger">This Wiki is set to private..</span></h3>
                         <% else %>
-                          <p><%= wiki.body %></p>
+                          <p><%= markdown(wiki.body) %></p>
                         <% end %>
                       </div>
                     </div>
