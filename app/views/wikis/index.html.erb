@@ -37,11 +37,7 @@
                 <div class="panel-body wiki-panel-body">
                     <div class="panel ">
                       <div class="panel-body wiki-panel-inner-body">
-                        <% if wiki.private? && wiki.user != current_user && !current_user.admin? %>
-                           <h3><span class="label label-danger">This Wiki is set to private..</span></h3>
-                        <% else %>
-                          <p><%= markdown(wiki.body) %></p>
-                        <% end %>
+                            <p><%= markdown(wiki.body) %></p>
                       </div>
                     </div>
                 </div>

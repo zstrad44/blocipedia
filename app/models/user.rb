@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable #:confirmable
 
-  after_initialize :set_standard_role , :if => :new_record?
+  has_many :wikis, dependent: :destroy, foreign_key: "user_id"
+  has_many :collaborators
+  has_many :wiki_collaborations, through: :collaborators, source: :wiki
 
-  has_many :wikis, dependent: :destroy
+  after_initialize :set_standard_role , :if => :new_record?
 
   before_save { self.email = email.downcase if email.present? }
 

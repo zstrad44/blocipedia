@@ -1,5 +1,7 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
+  has_many :collaborators
+  has_many :users, through: :collaborators
 
   after_initialize(:set_default_private, {if: :new_record?})
 
@@ -8,11 +10,10 @@ class Wiki < ActiveRecord::Base
     validates :user, presence: true
     # validates :user, presence: true
 
-  # default_scope { order('rank DESC') }
-
-  # scope :visible_to, -> (user) { user ? all : joins(:wiki).where('wikis.public' => true) }
-
-  scope :visible_to, -> (user){user ? where("private is null or private=? or user_id=?",false, user.id).uniq : where(private:false)}
+  # scope :visible_to, -> (user){user ? where("private is null or private=? or user_id=?",false, user.id).uniq : where(private:false)}
+  # scope :public_wikis, -> {where(private:false)}
+  # scope :private_wikis, -> {where(private:true)}
+  # scope :my_wikis, -> (user){where(user_id:user)}
 
   # default_scope {order('lower(title)')}
   default_scope { order(updated_at: :desc) }
@@ -23,5 +24,11 @@ class Wiki < ActiveRecord::Base
 
   def set_as_public
     self.update_attribute(:private, false)
+  end
+
+  def public?
+
+    !self.private
+
   end
 end

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :edit, :update]
 
-  resources :wikis
+  resources :wikis do
+    post 'collaborators/:user_id', as: :collaborator, to: "collaborators#create"
+    delete 'collaborators/:user_id', as: :collaborators, to: "collaborators#destroy"
+   end
+
   resources :charges, only: [:new, :create] do
     post '/cancel_subscription' => 'charges#cancel_subscription', as: :cancel_subscription
   end

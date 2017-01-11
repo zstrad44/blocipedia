@@ -24,7 +24,7 @@ users = User.all
      user:   users.sample,
      title:  Faker::Lorem.sentence,
      body:   Faker::Lorem.paragraph(10, true, 8),
-     private: Faker::Boolean.boolean(0.1)
+     private: true
    )
 
  end
@@ -40,6 +40,4 @@ user.update_attributes!(
 
 puts "Seed finished"
 puts "#{User.count} users created"
-puts "#{User.standard.count} standard users created"
-puts "#{User.premium.count}  premium users created"
 puts "#{Wiki.count} Wikis created"
